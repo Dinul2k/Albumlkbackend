@@ -1,5 +1,6 @@
 package com.dinul.albumlk.Entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import java.time.LocalDate;
 import java.util.List;
@@ -27,6 +28,7 @@ public class Album {
     // Many-to-One relationship with Artist
     @ManyToOne
     @JoinColumn(name = "artist_id", nullable = false)
+    @JsonBackReference
     private Artist artist;
 
     // Constructors
