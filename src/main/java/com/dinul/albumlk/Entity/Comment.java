@@ -1,4 +1,5 @@
 package com.dinul.albumlk.Entity;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import java.time.LocalDateTime;
 
@@ -24,6 +25,7 @@ public class Comment {
     // Many-to-One relationship with Reviewer
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "reviewer_id", nullable = false)
+    @JsonBackReference
     private Reviewer reviewer;
 
     // Constructors

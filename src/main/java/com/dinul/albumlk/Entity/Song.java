@@ -1,6 +1,7 @@
 package com.dinul.albumlk.Entity;
 
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 
 @Entity
@@ -20,6 +21,7 @@ public class Song {
     // Many-to-One relationship with Album
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "album_id", nullable = false)
+    @JsonBackReference
     private Album album;
 
     // Constructors

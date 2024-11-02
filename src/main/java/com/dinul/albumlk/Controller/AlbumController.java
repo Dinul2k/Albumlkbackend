@@ -1,5 +1,6 @@
 package com.dinul.albumlk.Controller;
 
+import com.dinul.albumlk.DTO.AlbumDTO;
 import com.dinul.albumlk.Entity.Album;
 import com.dinul.albumlk.Service.AlbumService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,26 +15,33 @@ public class AlbumController {
     @Autowired
     private AlbumService albumService;
 
+    // Returns a list of AlbumDTOs
     @GetMapping
-    public List<Album> getAllAlbums() {
+    public List<AlbumDTO> getAllAlbums() {
         return albumService.getAllAlbums();
     }
 
+    // Returns a single AlbumDTO by ID
     @GetMapping("/{id}")
-    public Album getAlbumById(@PathVariable Integer id) {
+    public AlbumDTO getAlbumById(@PathVariable Integer id) {
         return albumService.getAlbumById(id);
     }
 
+    // Accepts an Album entity and returns the saved AlbumDTO
     @PostMapping
-    public Album createAlbum(@RequestBody Album album) {
-        return albumService.createAlbum(album);
+    public AlbumDTO createAlbum(@RequestBody Album album) {
+        Album createdAlbum = albumService.createAlbum(album);
+        return albumService.convertToDTO(createdAlbum); // Convert to DTO after saving
     }
 
+    // Accepts an Album entity and updates the record, returning the updated AlbumDTO
     @PutMapping("/{id}")
-    public Album updateAlbum(@PathVariable Integer id, @RequestBody Album album) {
-        return albumService.updateAlbum(id, album);
+    public AlbumDTO updateAlbum(@PathVariable Integer id, @RequestBody Album album) {
+        Album updatedAlbum = albumService.updateAlbum(id, album);
+        return updatedAlbum != null ? albumService.convertToDTO(updatedAlbum) : null;
     }
 
+    // Deletes an album by ID
     @DeleteMapping("/{id}")
     public void deleteAlbum(@PathVariable Integer id) {
         albumService.deleteAlbum(id);

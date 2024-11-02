@@ -1,6 +1,7 @@
 package com.dinul.albumlk.Entity;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import java.time.LocalDate;
 import java.util.List;
@@ -23,6 +24,7 @@ public class Album {
 
     // One-to-many relationship with Song
     @OneToMany(mappedBy = "album", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonManagedReference
     private List<Song> songs;
 
     // Many-to-One relationship with Artist
