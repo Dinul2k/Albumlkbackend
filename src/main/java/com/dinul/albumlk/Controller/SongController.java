@@ -1,5 +1,6 @@
 package com.dinul.albumlk.Controller;
-import com.dinul.albumlk.Entity.Song;
+
+import com.dinul.albumlk.DTO.SongDTO;
 import com.dinul.albumlk.Service.SongService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -16,16 +17,16 @@ public class SongController {
 
     // Get all songs
     @GetMapping
-    public List<Song> getAllSongs() {
+    public List<SongDTO> getAllSongs() {
         return songService.getAllSongs();
     }
 
     // Get song by ID
     @GetMapping("/{id}")
-    public ResponseEntity<Song> getSongById(@PathVariable Integer id) {
-        Song song = songService.getSongById(id);
-        if (song != null) {
-            return ResponseEntity.ok(song);
+    public ResponseEntity<SongDTO> getSongById(@PathVariable Integer id) {
+        SongDTO songDTO = songService.getSongById(id);
+        if (songDTO != null) {
+            return ResponseEntity.ok(songDTO);
         } else {
             return ResponseEntity.notFound().build();
         }
@@ -33,15 +34,15 @@ public class SongController {
 
     // Create a new song
     @PostMapping
-    public ResponseEntity<Song> createSong(@RequestBody Song song) {
-        Song newSong = songService.createSong(song);
+    public ResponseEntity<SongDTO> createSong(@RequestBody SongDTO songDTO) {
+        SongDTO newSong = songService.createSong(songDTO);
         return ResponseEntity.ok(newSong);
     }
 
     // Update an existing song
     @PutMapping("/{id}")
-    public ResponseEntity<Song> updateSong(@PathVariable Integer id, @RequestBody Song songDetails) {
-        Song updatedSong = songService.updateSong(id, songDetails);
+    public ResponseEntity<SongDTO> updateSong(@PathVariable Integer id, @RequestBody SongDTO songDTO) {
+        SongDTO updatedSong = songService.updateSong(id, songDTO);
         if (updatedSong != null) {
             return ResponseEntity.ok(updatedSong);
         } else {
