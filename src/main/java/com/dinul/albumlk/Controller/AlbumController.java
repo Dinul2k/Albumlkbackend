@@ -23,7 +23,7 @@ public class AlbumController {
 
     // Returns a single AlbumDTO by ID
     @GetMapping("/{id}")
-    public AlbumDTO getAlbumById(@PathVariable Integer id) {
+    public AlbumDTO getAlbumById(@PathVariable Long id) {
         return albumService.getAlbumById(id);
     }
 
@@ -36,14 +36,14 @@ public class AlbumController {
 
     // Accepts an Album entity and updates the record, returning the updated AlbumDTO
     @PutMapping("/{id}")
-    public AlbumDTO updateAlbum(@PathVariable Integer id, @RequestBody Album album) {
+    public AlbumDTO updateAlbum(@PathVariable Long id, @RequestBody Album album) {
         Album updatedAlbum = albumService.updateAlbum(id, album);
         return updatedAlbum != null ? albumService.convertToDTO(updatedAlbum) : null;
     }
 
     // Deletes an album by ID
     @DeleteMapping("/{id}")
-    public void deleteAlbum(@PathVariable Integer id) {
+    public void deleteAlbum(@PathVariable Long id) {
         albumService.deleteAlbum(id);
     }
 }

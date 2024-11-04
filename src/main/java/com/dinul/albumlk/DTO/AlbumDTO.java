@@ -5,7 +5,7 @@ import java.util.List;
 
 public class AlbumDTO {
 
-    private Integer id;
+    private Long id;
     private String title;
     private LocalDate releaseDate;
     private String genre;
@@ -13,9 +13,8 @@ public class AlbumDTO {
     private List<Integer> songIds;     // Only include song IDs to avoid full Song objects
 
     // Constructors
-    public AlbumDTO() {}
 
-    public AlbumDTO(Integer id, String title, LocalDate releaseDate, String genre, Long artistId, List<Integer> songIds) {
+    public AlbumDTO(Long id, String title, LocalDate releaseDate, String genre, Long artistId, List<Integer> songIds) {
         this.id = id;
         this.title = title;
         this.releaseDate = releaseDate;
@@ -24,12 +23,16 @@ public class AlbumDTO {
         this.songIds = songIds;
     }
 
+    public AlbumDTO() {
+
+    }
+
     // Getters and Setters
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

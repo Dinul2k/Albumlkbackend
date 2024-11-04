@@ -1,5 +1,6 @@
 package com.dinul.albumlk.Controller;
-import com.dinul.albumlk.Entity.Artist;
+
+import com.dinul.albumlk.DTO.ArtistDTO;
 import com.dinul.albumlk.Service.ArtistService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -16,14 +17,14 @@ public class ArtistController {
 
     // Get all artists
     @GetMapping
-    public List<Artist> getAllArtists() {
+    public List<ArtistDTO> getAllArtists() {
         return artistService.getAllArtists();
     }
 
     // Get an artist by ID
     @GetMapping("/{id}")
-    public ResponseEntity<Artist> getArtistById(@PathVariable Long id) {
-        Artist artist = artistService.getArtistById(id);
+    public ResponseEntity<ArtistDTO> getArtistById(@PathVariable Long id) {
+        ArtistDTO artist = artistService.getArtistById(id);
         if (artist != null) {
             return ResponseEntity.ok(artist);
         } else {
@@ -33,14 +34,15 @@ public class ArtistController {
 
     // Create a new artist
     @PostMapping
-    public Artist createArtist(@RequestBody Artist artist) {
-        return artistService.createArtist(artist);
+    public ResponseEntity<ArtistDTO> createArtist(@RequestBody ArtistDTO artistDTO) {
+        ArtistDTO createdArtist = artistService.createArtist(artistDTO);
+        return ResponseEntity.status(201).body(createdArtist);
     }
 
     // Update an artist
     @PutMapping("/{id}")
-    public ResponseEntity<Artist> updateArtist(@PathVariable Long id, @RequestBody Artist artistDetails) {
-        Artist updatedArtist = artistService.updateArtist(id, artistDetails);
+    public ResponseEntity<ArtistDTO> updateArtist(@PathVariable Long id, @RequestBody ArtistDTO artistDetails) {
+        ArtistDTO updatedArtist = artistService.updateArtist(id, artistDetails);
         if (updatedArtist != null) {
             return ResponseEntity.ok(updatedArtist);
         } else {

@@ -37,7 +37,7 @@ public class AlbumService {
                 .collect(Collectors.toList());
     }
 
-    public AlbumDTO getAlbumById(Integer id) {
+    public AlbumDTO getAlbumById(Long id) {
         Album album = albumRepository.findById(id).orElse(null);
         return album != null ? convertToDTO(album) : null;
     }
@@ -48,7 +48,7 @@ public class AlbumService {
         return albumRepository.save(album);
     }
 
-    public Album updateAlbum(Integer id, Album albumDetails) {
+    public Album updateAlbum(Long id, Album albumDetails) {
         Album existingAlbum = albumRepository.findById(id).orElse(null);
         if (existingAlbum != null) {
             existingAlbum.setTitle(albumDetails.getTitle());
@@ -59,7 +59,7 @@ public class AlbumService {
         return null;
     }
 
-    public void deleteAlbum(Integer id) {
+    public void deleteAlbum(Long id) {
         albumRepository.deleteById(id);
     }
 }
