@@ -3,6 +3,7 @@ package com.dinul.albumlk.Entity;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -25,7 +26,7 @@ public class Reviewer {
     // One-to-Many relationship with Comment
     @OneToMany(mappedBy = "reviewer", cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonManagedReference
-    private List<Comment> comments;
+    private List<Comment> comments = new ArrayList<>(); // Initialize as an empty list
 
     // Constructors
     public Reviewer() {
